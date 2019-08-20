@@ -15,6 +15,9 @@ App({
       })
     }
 
-    this.globalData = {}
+    this.globalData = {
+      openid:"",
+      managerMode:0,
+    }
   }
 })

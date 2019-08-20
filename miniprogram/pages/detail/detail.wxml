@@ -1,0 +1,14 @@
+<!--pages/info/info.wxml-->
+<view class='item' wx:for='{{dataArray}}' wx:key='{{index}}'>
+    <text class='title'>{{item.title}}</text>
+    <text class='content' space='emsp'>{{item.content}}  </text>
+</view>
+<button type="primary" size="default" bindtap='accept' wx:if="{{mode&&data.status==0}}">受 理</button>
+<view class="section" wx:if="{{mode}}">
+  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="picker">
+    <button type="primary" size="default" >分配柜号</button>
+    </view>
+  </picker>
+</view>
+<button type="primary" size="default" bindtap='open' wx:if="{{mode||data.status==2}}">开柜</button>

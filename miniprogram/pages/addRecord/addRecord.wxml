@@ -1,0 +1,7 @@
+<!--pages/add/add.wxml-->
+<view class='wrapper'>
+    <text class='title'>申请书名</text>
+    <input value='{{name}}' maxlength='15' placeholder='你要借的书名' bindinput='editName'/>
+</view>
+
+<button disabled='{{disabled}}' bindtap='add'>申 请</button>

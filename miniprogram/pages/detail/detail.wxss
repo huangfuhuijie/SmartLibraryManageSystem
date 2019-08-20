@@ -1,0 +1,42 @@
+/* pages/info/info.wxss */
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    margin: 15px 0;
+    font-size: 20px;
+    height: 60px;
+    width: 100%;
+    align-items: center;
+    justify-content:space-between;
+}
+
+.item{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    font-size: 20px;
+    height: 60px;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 1px;
+    justify-content:space-between;
+}
+
+.title{
+    width: 70px;
+    margin: 15px;
+    word-break: keep-all;
+    white-space: nowrap;     
+    align-content: center;
+}
+
+.content{
+    color: gray;
+}
+
+button{
+  width:90%;
+  border-radius: 10px;
+  margin: 5%;
+}

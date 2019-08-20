@@ -1,0 +1,21 @@
+<!--pages/index/index.wxml-->
+<view class='item-container' wx:for='{{dataArray}}' wx:key='{{index}}'>
+    <view class='device-container'>
+        <view class='text-container'>
+            <text class='name'>{{item.bookName}}</text>
+            <text class='id'>{{item.date}}</text>
+        </view>
+        <view class='red-light' wx:if='{{item.status==0}}'>未受理</view>
+        <view class='green-light' wx:if='{{item.status==1}}'>已受理</view>
+        <view class='green-light' wx:if='{{item.status==2}}'>已入柜</view>
+        <view class='blue-light' wx:if='{{item.status==3}}'>已取出</view>
+    </view>
+    <view class='btn-container' >
+        <button class='btn btn-info' bindtap='showInfo' data-index='{{index}}'>详情</button>
+        <button class='btn' bindtap='edit' data-index='{{index}}'>删除</button>
+    </view>
+</view>
+
+<view class='add-device' bindtap='addDevice'>
+    <image class='icon' src='/images/add.png'></image>
+</view>

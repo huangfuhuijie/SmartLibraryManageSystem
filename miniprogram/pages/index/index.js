@@ -10,15 +10,7 @@ Page({
     requestResult: ''
   },
 
-  onLoad: function() {
-    if (!wx.cloud) {
-      wx.redirectTo({
-        url: '../chooseLib/chooseLib',
-      })
-      return
-    }
-
-    // 获取用户信息
+  onLoad: function () {    // 获取用户信息
     wx.getSetting({
       success: res => {
         if (res.authSetting['scope.userInfo']) {
@@ -36,7 +28,7 @@ Page({
     })
   },
 
-  onGetUserInfo: function(e) {
+  onGetUserInfo: function (e) {
     if (!this.logged && e.detail.userInfo) {
       this.setData({
         logged: true,
@@ -46,7 +38,20 @@ Page({
     }
   },
 
-  onGetOpenid: function() {
+  managerMode:function(){
+    wx.showToast({
+      title: '管理员模式',
+      icon: "success",
+      duration: 1000,
+    });
+    app.globalData.managerMode = !app.globalData.managerMode;
+  },
+
+  onGetOpenid: function () {
+    wx.showToast({
+      title: '正在发送请求',
+      icon: "loading",
+    })
     // 调用云函数
     wx.cloud.callFunction({
       name: 'login',
@@ -54,67 +59,35 @@ Page({
       success: res => {
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
-        wx.navigateTo({
-          url: '../userConsole/userConsole',
-        })
+        wx.showToast({
+          title: '登陆成功',
+          icon: "success",
+          duration: 1000,
+        });
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
-        wx.navigateTo({
-          url: '../deployFunctions/deployFunctions',
-        })
+        wx.showToast({
+          title: '登陆失败',
+          icon: "none",
+          duration: 1000,
+        });
       }
     })
   },
-
-  // 上传图片
-  doUpload: function () {
-    // 选择图片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-
-        wx.showLoading({
-          title: '上传中',
-        })
-
-        const filePath = res.tempFilePaths[0]
-        
-        // 上传图片
-        const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-            
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
-        })
-
-      },
-      fail: e => {
-        console.error(e)
-      }
-    })
-  },
+  records:function(){
+    if(app.globalData.openid==undefined||app.globalData.openid=='')
+    {
+      wx.showToast({
+        title: '请先登陆',
+        icon: "none",
+        duration: 1000,
+      });
+    }else{
+      wx.navigateTo({
+        url: '../records/records',
+      })
+    }
+  }
 
 })
