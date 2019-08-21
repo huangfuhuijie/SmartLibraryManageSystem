@@ -121,8 +121,8 @@ var finish = function (data) {
   })
 }
 var assignOrder = function (order) {//下发命令
-  var id = "541741709";
-  var APIKey = "6Vn9U6O9NNW4hLS1S=uWbBu2z6Y=";
+  var id = "537839185";
+  var APIKey = "C4zI7zdsHmRrZy6wXZ=iKfC2mQY=";
   return new Promise(function (resolve, reject) {
     wx.request({
       url: 'https://api.heclouds.com/cmds?device_id=' + id,

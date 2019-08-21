@@ -22,7 +22,7 @@ Page({
     ],
     data:Object,
     mode:0,
-    array:[1,2,3,4,5,6,7,8],
+    array:[1,2,3,4,5,6,7,8,9,10,11,12],
   },
 
   onLoad: function (options) {
@@ -83,7 +83,8 @@ Page({
     
     var that = this;
     var data = this.data.data;
-    data.counter = Number(e.detail.value);
+    data.counter = Number(e.detail.value)+1;
+    console.log(data.counter);
     data.status = 2;
     dataBase.distribution(data).then(function(res){
       wx.showToast({
@@ -92,7 +93,7 @@ Page({
         duration: 1000,
       });
       var dat = that.data.dataArray;
-      dat[3].content = e.detail.value;
+      dat[3].content = data.counter;
       dat[1].content = "已入柜",
       that.setData({
         dataArray:dat,
