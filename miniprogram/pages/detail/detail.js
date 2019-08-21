@@ -111,9 +111,7 @@ Page({
     }
     var order = {
       source: "WeChat",
-      instruction: {
-        index: counter_num,
-      }
+      index: counter_num,
     }
     order = JSON.stringify(order);
     if(this.data.mode==0)//用户模式
